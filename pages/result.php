@@ -4,6 +4,7 @@ session_start();
 $noic = '';
 $nama = '';
 
+
 $noic = $_SESSION['noic'];
 $nama = $_SESSION['nama'];
 
@@ -12,7 +13,6 @@ if($noic == ''){
         <script>window.location.replace("http:/keputusan/");</script>
     <?php
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -46,29 +46,31 @@ if($noic == ''){
 <body>
 
   <script type="text/javascript">
+
     $(document).ready(function(){
 
-      $('#btnsemak').on('click', function(e){
+      $('#btnsemak').on('click', function(){
         var ic = $('#ic').val();
-        // alert(ic);
+        var job_title = $('#job_title').val();
+
         $.ajax({
           type:'POST',
-          url:'getdata/getresult.php',
-          data: {ic:ic},
+          url:'../getdata/getresult.php',
+          data: {ic:ic, job_title:job_title},
           success:function(html){
             $('#result').html(html);
           }
         });
         // alert(ic); 
       });
+
     });
 
   </script>
 
   <?php
-
-    
-
+    $ic = '';
+    $job_title = '';
   ?>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -116,6 +118,7 @@ if($noic == ''){
         </button>
       </div>
     </nav>
+
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
@@ -147,6 +150,7 @@ if($noic == ''){
         </div>
       </div>
       <!-- partial -->
+
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
@@ -165,6 +169,7 @@ if($noic == ''){
           </li>
         </ul>
       </nav>
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -174,29 +179,27 @@ if($noic == ''){
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Semakan Temuduga</h4>
-                    <p class="card-description">Semak keputusan temuduga dengan masukkan kad pengenalan dan jawatan</p>
-                    <br>
+                    <p class="card-description">Semak keputusan temuduga dengan masukkan kad pengenalan dan jawatan.</p>
+                    <hr>
                     <form class="forms-sample" method="post">
                       <div class="form-group row">
-                        <label for="ic" class="col-sm-3 col-form-label">Kad Pengenalan</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="ic" placeholder="Kad Pengenalan" name="ic">
+                          <label for="ic" class="form-label">Kad Pengenalan</label>
+                          <input type="text" class="form-control" id="ic" placeholder="Kad Pengenalan">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="job_title" class="form-label">Jawatan</label>
+                          <input type="text" class="form-control" id="job_title" placeholder="Jawatan">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="job_title" class="col-sm-3 col-form-label">Jawatan</label>
-                        <div class="col-sm-6">
-                          <input type="text" class="form-control" id="job_title" placeholder="Jawatan" name="job_title">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="col-sm-3"></div>
+                        <div class="col-sm-5"></div>
                         <div class="col">
-                          <button type="submit" class="btn btn-primary btn-sm mr-2" id="btnsemak">Submit</button>
+                          <button type="button" class="btn btn-primary btn-sm mr-2" id="btnsemak">Submit</button>
                         </div>
                       </div>
                     </form>
-
+                    <!-- end form -->
                 </div>
               </div>
             </div>
@@ -206,10 +209,10 @@ if($noic == ''){
             <!-- result here -->
                   
           </div>
-
-        </div>
         
+        </div>
         <!-- content-wrapper ends -->
+
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
