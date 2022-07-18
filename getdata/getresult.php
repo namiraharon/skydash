@@ -2,7 +2,7 @@
 include('../include/connect.inc');
 
    $ic = $_POST['ic'];
-   $job_title = $_POST['job_title'];
+   $position = $_POST['position'];
    // $ic = "123";
 
    // if($ic <> ''){ $ic = " and ic = '$ic' ";}
@@ -16,9 +16,9 @@ include('../include/connect.inc');
    //          WHERE ic = '$ic'
    //          GROUP BY ic
    //          ";
-   $query = "select * from keputusan where ic = '$ic' or job_title = '$job_title' ";
+   $query = "select * from keputusan where ic = '$ic' OR position = '$position' ";
 
-   // $query = "SELECT * from keputusan where 1=1  $ic $job_title ";
+   // $query = "SELECT * from keputusan where 1=1  $ic $position ";
    $result = mysqli_query($mysql, $query)or die(mysqli_error($mysql));
    $num = mysqli_num_rows($result);
 
@@ -35,26 +35,31 @@ include('../include/connect.inc');
                   <table class="table table-striped table-borderless">
                      <thead>
                         <tr>
+                           <th>Nama</th>
                            <th>Kad Pengenalan</th>
                            <th>Jawatan</th>
                            <th>Status</th>
                         </tr>  
                      </thead>
                      <tbody>
-                   
                         <?php 
-                        while($row = mysqli_fetch_array($result)){
-                        extract($row); ?>
+                           while($row = mysqli_fetch_array($result)){
+                           extract($row); 
+                        ?>
                         <tr>
+                           <td><?php echo $nama; ?></td>
                            <td><?php echo $ic; ?></td>
-                           <td><?php echo $job_title; ?></td>
+                           <td><?php echo $position; ?></td>
                            <td class="font-weight-medium">
-                              <?php if($status == 'berjaya'){ ?>
+                              <?php if($status == '1'){ ?>
                                  <div class="badge badge-success"> Berjaya</div> 
                               <?php } 
-                                 elseif($status == 'tidak berjaya'){ ?>
+                                 elseif($status == '2'){ ?>
                                  <div class="badge badge-danger"> Tidak Berjaya</div> 
-                              <?php } ?>
+                              <?php }
+                                 elseif($status == '3'){ ?>
+                                 <div class="badge badge-warning"> Temuduga Kedua</div> 
+                              <?php }?>
                            </td>
                         </tr> 
                         <?php } ?>  
@@ -66,6 +71,9 @@ include('../include/connect.inc');
       </div>
            
    <?php 
+   }
+   else {
+      echo '<script>alert("Kad Pengenalan '.$ic.' tidak wujud di pangkalan data")</script>';
    }
    ?>
 

@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Megafair Result</title>
+  <title>Employment System</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/feather/feather.css">
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
@@ -30,16 +30,16 @@
                 <img src="images/perkeso-logo.png" alt="logo" style="width: 100px; height: 100px;">
               </div>
               <h4>Hello! let's get started</h4>
-              <h6 class="font-weight-light">Log in to continue.</h6>
+              <h6 class="font-weight-light">Log masuk untuk meneruskan</h6>
               <form class="pt-3" action="script/loginscript.php" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control" name="ic" placeholder="Kad Pengenalan">
+                  <input type="text" class="form-control form-control" name="ic" placeholder="Kad Pengenalan" required>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control" name="password" placeholder="Password">
+                  <input type="password" class="form-control form-control" name="password" placeholder="Katalaluan" required>
                 </div>
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-primary font-weight-medium auth-form-btn">LOG IN</button>
+                  <button type="submit" class="btn btn-block btn-primary font-weight-medium auth-form-btn">LOG MASUK</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
