@@ -58,6 +58,20 @@ session_start();
           }
         }); 
       });
+
+      $('#btnlist').on('click', function(){
+
+        $.ajax({    //create an ajax request to display.php
+        type: "GET",
+        url: "../getdata/getlist.php",             
+        dataType: "html",   //expect html to be returned                
+        success: function(response){                    
+            $("#bodylist").html(response); 
+            //alert(response);
+          }
+        }); 
+      });
+
     });
 
   </script>
@@ -127,7 +141,7 @@ session_start();
 
                           <div class="row">
                             <div class="col">
-                              <button type="button" class="btn btn-sm btn-inverse-primary" data-toggle="modal" data-target="#exampleModal">
+                              <button type="button" class="btn btn-sm btn-inverse-primary" data-toggle="modal" data-target="#exampleModal" id="btnlist">
     Senarai Calon
   </button>
                             </div>
@@ -181,8 +195,9 @@ session_start();
   <!-- container-scroller -->
 
 
+
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Senarai Calon</h5>
@@ -190,46 +205,8 @@ session_start();
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-
-          <?php 
-            $query2 = "select * from registration";
-            $result2 = mysqli_query($mysql, $query2)or die(mysqli_error($mysql));
-            $num2 = mysqli_num_rows($result2);
-
-            if($num > 0){  
-          ?>
-          
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Nama</th>
-                    <th>Kad Pengenalan</th>
-                    <th>Status OKU</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php 
-                  $a=1;
-                  while($row = mysqli_fetch_array($result)){
-                  extract($row);    
-
-                    echo "<tr><td>".$a."</td>";
-                    echo "<td>".$nama."</td>";
-                    echo "<td>".$ic."</td>";
-                    echo "<td>".$oku."</td></tr>";
-                    $a++;
-                  }
-                  ?>
-                </tbody>
-              </table>
-            </form>
-          </div>
-        <?php } ?>
-
-
+        <div class="modal-body" id="bodylist">
+          <!-- list here -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Tutup</button>
@@ -237,6 +214,8 @@ session_start();
       </div>
     </div>
   </div>
+
+
 
   <!-- plugins:js -->
   <script src="../vendors/js/vendor.bundle.base.js"></script>
